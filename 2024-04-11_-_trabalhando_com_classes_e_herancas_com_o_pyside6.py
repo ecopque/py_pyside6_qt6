@@ -10,9 +10,9 @@ class MyWindow(QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
         
-        self.button = QPushButton('Click here!')
-        self.button.setStyleSheet('font-size: 40px; color: blue')
-        self.button.clicked.connect(self.slot2_example)
+        self.button1 = QPushButton('Click here!')
+        self.button1.setStyleSheet('font-size: 40px; color: blue')
+        self.button1.clicked.connect(self.slot2_example)
 
         self.button2 = QPushButton('Click here 2!')
         self.button2.setStyleSheet('font-size: 20px; color: red')
@@ -27,7 +27,7 @@ class MyWindow(QMainWindow):
         self.grid_layout = QGridLayout()
         self.central_widget.setLayout(self.grid_layout)
 
-        self.grid_layout.addWidget(self.button, 1, 1, 1, 1)
+        self.grid_layout.addWidget(self.button1, 1, 1, 1, 1)
         self.grid_layout.addWidget(self.button2, 1, 2, 1, 1)
         self.grid_layout.addWidget(self.button3, 3, 1, 1, 2)
 
@@ -53,6 +53,5 @@ class MyWindow(QMainWindow):
         print('Is it marked?', checked)
 
 window = MyWindow()
-
 window.show()
 app.exec()
