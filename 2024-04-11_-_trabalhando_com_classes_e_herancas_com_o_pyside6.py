@@ -12,9 +12,11 @@ class MyWindow(QMainWindow):
         
         self.button = QPushButton('Click here!')
         self.button.setStyleSheet('font-size: 40px; color: blue')
-        self.button.clicked.connect(slot3_example(sub_mark)) #39:
+        self.button.clicked.connect(self.slot2_example)
+
         self.button2 = QPushButton('Click here 2!')
         self.button2.setStyleSheet('font-size: 20px; color: red')
+
         self.button3 = QPushButton('Run!')
         self.button3.setStyleSheet('font-size: 20px; color: green')
 
@@ -29,37 +31,28 @@ class MyWindow(QMainWindow):
         self.grid_layout.addWidget(self.button2, 1, 2, 1, 1)
         self.grid_layout.addWidget(self.button3, 3, 1, 1, 2)
 
-        @Slot()
-        def slot_example(self, status_bar):
-            def inner():
-                status_bar.showMessage('My slot has been executed.')
-            return inner
-        @Slot
-        def slot2_example(self, checked):
-             print('Is it marked?', checked)
-        @Slot
-        def slot3_example(self, action):
-            def inner():
-              self.slot2_example(action.isChecked())
-            return inner
+        self.status_bar = self.statusBar()
+        self.status_bar.showMessage('Message status bar -> (https://linktr.ee/edsoncopque).')
+
+        self.menu_bar = self.menuBar()
+        self.top_file_menu = self.menu_bar.addMenu('File')
+        self.top_edit_menu = self.menu_bar.addMenu('Edit')
+        self.sub_number = self.top_edit_menu.addAction('Number')
+        self.sub_number.triggered.connect(self.slot_example) #
+
+        self.sub_mark = self.top_edit_menu.addAction('Check')
+        self.sub_mark.setCheckable(True)
+        self.sub_mark.toggled.connect(self.slot2_example)
+        self.sub_mark.hovered.connect(self.slot2_example)
+
+    @Slot()
+    def slot_example(self):
+        self.status_bar.showMessage('My slot has been executed.')
+    @Slot
+    def slot2_example(self, checked):
+        print('Is it marked?', checked)
 
 window = MyWindow()
 
-status_bar = window.statusBar()
-status_bar.showMessage('Message status bar -> (https://linktr.ee/edsoncopque).')
-
-menu_bar = window.menuBar()
-top_file_menu = menu_bar.addMenu('File')
-top_edit_menu = menu_bar.addMenu('Edit')
-sub_number = top_edit_menu.addAction('Number')
-# sub_number.triggered.connect(slot_example)
-sub_number.triggered.connect(lambda: slot_example(status_bar))
-
-sub_mark = top_edit_menu.addAction('Check')
-sub_mark.setCheckable(True)
-sub_mark.toggled.connect(slot2_example)
-sub_mark.hovered.connect(slot3_example(sub_mark))
-
-# central_widget.show() #13:
 window.show()
 app.exec()
