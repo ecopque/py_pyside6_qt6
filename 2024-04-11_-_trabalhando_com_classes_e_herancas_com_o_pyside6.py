@@ -50,7 +50,7 @@ class MyWindow(QMainWindow):
         self.status_bar.showMessage('My slot has been executed.')
     @Slot()
     def slot2_example(self, checked):
-        print('Is it marked?', checked)
+        print('Is it marked?', self.sub_mark.isChecked())
 
 window = MyWindow()
 window.show()
