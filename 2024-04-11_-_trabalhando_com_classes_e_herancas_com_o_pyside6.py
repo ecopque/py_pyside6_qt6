@@ -12,7 +12,7 @@ class MyWindow(QMainWindow):
         
         self.button1 = QPushButton('Click here!')
         self.button1.setStyleSheet('font-size: 40px; color: blue')
-        self.button1.clicked.connect(self.slot2_example)
+        self.button1.clicked.connect(self.secocond_action_marked)
 
         self.button2 = QPushButton('Click here 2!')
         self.button2.setStyleSheet('font-size: 20px; color: red')
@@ -38,18 +38,18 @@ class MyWindow(QMainWindow):
         self.top_file_menu = self.menu_bar.addMenu('File')
         self.top_edit_menu = self.menu_bar.addMenu('Edit')
         self.sub_number = self.top_edit_menu.addAction('Number')
-        self.sub_number.triggered.connect(self.slot_example) #
+        self.sub_number.triggered.connect(self.status_bar_msg) #
 
         self.sub_mark = self.top_edit_menu.addAction('Check')
         self.sub_mark.setCheckable(True)
-        self.sub_mark.toggled.connect(self.slot2_example)
-        self.sub_mark.hovered.connect(self.slot2_example)
+        self.sub_mark.toggled.connect(self.secocond_action_marked)
+        self.sub_mark.hovered.connect(self.secocond_action_marked)
 
     @Slot()
-    def slot_example(self):
+    def status_bar_msg(self):
         self.status_bar.showMessage('My slot has been executed.')
     @Slot()
-    def slot2_example(self, checked):
+    def secocond_action_marked(self):
         print('Is it marked?', self.sub_mark.isChecked())
 
 window = MyWindow()
