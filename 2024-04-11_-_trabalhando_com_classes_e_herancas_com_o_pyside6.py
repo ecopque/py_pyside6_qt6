@@ -52,6 +52,7 @@ class MyWindow(QMainWindow):
     def secocond_action_marked(self):
         print('Is it marked?', self.sub_mark.isChecked())
 
-window = MyWindow()
-window.show()
-app.exec()
+if __name__ == '__main__':
+    window = MyWindow()
+    window.show()
+    app.exec()
