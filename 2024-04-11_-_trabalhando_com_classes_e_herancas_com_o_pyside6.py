@@ -4,8 +4,6 @@ from PySide6.QtWidgets import (QApplication, QPushButton,
             QWidget, QVBoxLayout, QHBoxLayout, QGridLayout,
             QMainWindow)
 
-app = QApplication(sys.argv)
-
 class MyWindow(QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -53,6 +51,7 @@ class MyWindow(QMainWindow):
         print('Is it marked?', self.sub_mark.isChecked())
 
 if __name__ == '__main__':
+    app = QApplication(sys.argv)
     window = MyWindow()
     window.show()
     app.exec()
