@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import (QApplication, QWidget)
 from window import Ui_myWidget
-from PySide6.QtCore import QObject, Signal, Slot, QThread
+from PySide6.QtCore import QObject, Signal, QThread
 import sys
 import time
 
@@ -11,6 +11,7 @@ class mtd_workerone(QObject):
 
     def mtd_run(self):
         var_value = '0'
+        self.started.emit(var_value)
         for i in range(5):
             var_value = str(i)
             self.progressed.emit(var_value)
@@ -45,13 +46,18 @@ class cls_mywidget(QWidget, Ui_myWidget):
 
         var_thread.start()
 
-    def mtd_workerstarted(self):
+    def mtd_workerstarted(self, value):
+            self.button1.setDisabled(True)
+            self.label1.setText(value)
             print('Worker iniciado')
 
-    def mtd_workerprogressed(self):
+    def mtd_workerprogressed(self, value):
+            self.label1.setText(value)
             print('Em progresso')
 
-    def mtd_workerfinished(self):
+    def mtd_workerfinished(self, value):
+            self.button1.setDisabled(False)
+            self.label1.setText(value)
             print('Finalizado')
 
 
