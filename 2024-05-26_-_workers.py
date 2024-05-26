@@ -39,11 +39,21 @@ class cls_mywidget(QWidget, Ui_myWidget):
         var_thread.finished.connect(var_thread.deleteLater)
         var_worker.finished.connect(var_worker.deleteLater)
 
-        var_worker.started.connect(lambda: print('Worker iniciado'))
-        var_worker.progressed.connect(lambda: print('Progressed iniciado: em progresso'))
-        var_worker.finished.connect(lambda: print('Finalizado'))
+        var_worker.started.connect(self.mtd_workerstarted)
+        var_worker.progressed.connect(self.mtd_workerprogressed)
+        var_worker.finished.connect(self.mtd_workerfinished)
 
         var_thread.start()
+
+    def mtd_workerstarted(self):
+            print('Worker iniciado')
+
+    def mtd_workerprogressed(self):
+            print('Em progresso')
+
+    def mtd_workerfinished(self):
+            print('Finalizado')
+
 
 if __name__ == '__main__':
     var_app = QApplication(sys.argv)
