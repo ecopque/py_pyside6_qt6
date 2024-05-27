@@ -4,7 +4,7 @@ from PySide6.QtCore import QObject, Signal, QThread
 import sys
 import time
 
-class mtd_workerone(QObject): #1:
+class cls_workerone(QObject): #1:
     started = Signal(str) #2:
     progressed = Signal(str) #2:
     finished = Signal(str) #2:
@@ -15,7 +15,7 @@ class mtd_workerone(QObject): #1:
 
         for i in range(5): #5:
             var_value = str(i) #5:
-            self.progressed.e #6:
+            self.progressed.emit(var_value) #6:
         self.finished.emit(var_value) #7:
 
 class cls_mywidget(QWidget, Ui_myWidget): #8:
@@ -26,7 +26,7 @@ class cls_mywidget(QWidget, Ui_myWidget): #8:
         self.button1.clicked.connect(self.mtd_hardwork) #9:
 
     def mtd_hardwork(self): #10:
-        self._var_worker = mtd_workerone() #11:
+        self._var_worker = cls_workerone() #11:
         self._var_thread = QThread() #11:
 
         var_worker = self._var_worker #12:
