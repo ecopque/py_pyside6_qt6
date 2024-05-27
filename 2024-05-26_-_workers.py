@@ -4,60 +4,59 @@ from PySide6.QtCore import QObject, Signal, QThread
 import sys
 import time
 
-class mtd_workerone(QObject):
-    started = Signal(str)
-    progressed = Signal(str)
-    finished = Signal(str)
+class mtd_workerone(QObject): #1:
+    started = Signal(str) #2:
+    progressed = Signal(str) #2:
+    finished = Signal(str) #2:
 
     def mtd_run(self):
         var_value = '0'
-        self.started.emit(var_value)
-        for i in range(5):
-            var_value = str(i)
-            self.progressed.emit(var_value)
-            time.sleep(1)
-        self.finished.emit(var_value)
+        self.started.emit(var_value) #3: #4:
 
-class cls_mywidget(QWidget, Ui_myWidget):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.setupUi(self)
+        for i in range(5): #5:
+            var_value = str(i) #5:
+            self.progressed.e #6:
+        self.finished.emit(var_value) #7:
 
-        self.button1.clicked.connect(self.mtd_hardwork)
+class cls_mywidget(QWidget, Ui_myWidget): #8:
+    def __init__(self, parent=None): #8:
+        super().__init__(parent) #8:
+        self.setupUi(self) #8:
 
-    def mtd_hardwork(self):
+        self.button1.clicked.connect(self.mtd_hardwork) #9:
 
-        self._var_worker = mtd_workerone()
-        self._var_thread = QThread()
+    def mtd_hardwork(self): #10:
+        self._var_worker = mtd_workerone() #11:
+        self._var_thread = QThread() #11:
 
-        var_worker = self._var_worker
-        var_thread = self._var_thread
+        var_worker = self._var_worker #12:
+        var_thread = self._var_thread #12:
+        var_worker.moveToThread(var_thread) #12:
 
-        var_worker.moveToThread(var_thread)
-        var_thread.started.connect(var_worker.mtd_run)
-        var_worker.finished.connect(var_thread.quit)
+        var_thread.started.connect(var_worker.mtd_run) #13:
+        var_worker.finished.connect(var_thread.quit) #14:
         
-        var_thread.finished.connect(var_thread.deleteLater)
-        var_worker.finished.connect(var_worker.deleteLater)
+        var_thread.finished.connect(var_thread.deleteLater) #15:
+        var_worker.finished.connect(var_worker.deleteLater) #15:
 
-        var_worker.started.connect(self.mtd_workerstarted)
-        var_worker.progressed.connect(self.mtd_workerprogressed)
-        var_worker.finished.connect(self.mtd_workerfinished)
+        var_worker.started.connect(self.mtd_workerstarted) #16:
+        var_worker.progressed.connect(self.mtd_workerprogressed) #16:
+        var_worker.finished.connect(self.mtd_workerfinished) #16:
 
-        var_thread.start()
+        var_thread.start() #17:
 
-    def mtd_workerstarted(self, value):
-            self.button1.setDisabled(True)
-            self.label1.setText(value)
-            print('Worker iniciado')
+    def mtd_workerstarted(self, value): #18:
+            self.button1.setDisabled(True) #18:
+            self.label1.setText(value) #18:
+            print('Worker iniciado') #18:
 
-    def mtd_workerprogressed(self, value):
-            self.label1.setText(value)
-            print('Em progresso')
+    def mtd_workerprogressed(self, value): #19:
+            self.label1.setText(value) #19:
+            print('Em progresso') #19:
 
-    def mtd_workerfinished(self, value):
-            self.button1.setDisabled(False)
-            self.label1.setText(value)
+    def mtd_workerfinished(self, value): #20:
+            self.button1.setDisabled(False) #20:
+            self.label1.setText(value) #20:
             print('Finalizado')
 
 
