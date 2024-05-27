@@ -16,6 +16,7 @@ class cls_workerone(QObject): #1:
         for i in range(5): #5:
             var_value = str(i) #5:
             self.progressed.emit(var_value) #6:
+            time.sleep(1)
         self.finished.emit(var_value) #7:
 
 class cls_mywidget(QWidget, Ui_myWidget): #8:
