@@ -25,6 +25,7 @@ class cls_mywidget(QWidget, Ui_myWidget): #8:
         self.setupUi(self) #8:
 
         self.button1.clicked.connect(self.mtd_hardwork) #9:
+        self.button1.setStyleSheet('background: blue;')
 
     def mtd_hardwork(self): #10:
         self._var_worker = cls_workerone() #11:
