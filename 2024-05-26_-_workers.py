@@ -26,6 +26,7 @@ class cls_mywidget(QWidget, Ui_myWidget): #8:
 
         self.button1.clicked.connect(self.mtd_hardwork) #9:
         self.button1.setStyleSheet('background: blue;')
+        self.button1.setToolTip('Send msg?')
 
     def mtd_hardwork(self): #10:
         self._var_worker = cls_workerone() #11:
@@ -60,7 +61,6 @@ class cls_mywidget(QWidget, Ui_myWidget): #8:
             self.button1.setDisabled(False) #20:
             self.label1.setText(value) #20:
             print('Finalizado')
-
 
 if __name__ == '__main__':
     var_app = QApplication(sys.argv)
